@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@page import="com.poseidon.dao.BoardDAO"%>
 <%@page import="com.poseidon.dto.BoardDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -7,9 +8,9 @@
 <%@page import="com.poseidon.db.DBConnection"%>
 <%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix = "c"  %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions"  prefix="fn" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 
  <% 
@@ -110,13 +111,14 @@ nuber가 100보다 크다면 '텍스트'가 출력-->
 그안에 formatDate를 사용하여 fmt로 날짜 대입 
 
  -->
+ ${fn:length(list) }
 <hr>
 <c:set value=" <%=new Date() %>" var="date"></c:set>
+         <fmt:formatDate value="${date }" type = "date"/>
 <c:choose>
       <c:when test="${fn:length(list) > 0 }"> 
          테이블 
          <c:forEach items="${list }" var="i"></c:forEach>
-         <fmt:formatDate value="${date }" type = "date"/>
          <fmt:formatDate value="${date }" type = "time"/><br>
          <fmt:formatDate value="${date }" type = "both"/><br>
          </c:when>

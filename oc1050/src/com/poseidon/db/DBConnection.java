@@ -8,8 +8,8 @@ public class DBConnection {
 		Connection con = null;
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
-			String url = "jdbc:mariadb://localhost:3306/poseidon";
-			con = DriverManager.getConnection(url, "poseidon", "01234567");
+			String url = "jdbc:mariadb://localhost:3306/jaejae";
+			con = DriverManager.getConnection(url, "jaejae", "sltkajsep21");
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -7,7 +7,7 @@
     
 <%
     BoardDAO dao = new BoardDAO();
-    list<HashMap<String, String>> list = dao.select1();
+    List<HashMap<String, String>> list = dao.select1();
     request.setAttribute("list1", list);
 %>    
     

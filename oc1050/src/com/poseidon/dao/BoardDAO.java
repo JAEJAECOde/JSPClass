@@ -128,7 +128,7 @@ public String login(String id, String pw) {
       Connection conn = null;
       PreparedStatement pstmt = null;
       ResultSet rs = null;
-      String sql = "SELECT * FROM jae WHERE user_id = '?' AND user_pw='?';";
+      String sql = "SELECT * FROM jae WHERE user_id = ? AND user_pw=?;";
      // String sql1 = "SELECT * FROM jae WHERE user_id = '" +id+ "' AND user_pw='" +pw+ "';";
       //String sql2 = "str" + id + "' str";  그냥 쓰면 힘들어짐 그래서 정보가 들어가는곳을 ?으로 대채 
       //              str 'admin' str

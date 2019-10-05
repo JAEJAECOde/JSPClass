@@ -1,3 +1,4 @@
+<%@page import="com.poseidon.dao.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -7,6 +8,11 @@
        
        System.out.println(id);
        System.out.println(pw);
+       //값 확인 되면 db와 연동
+       
+       BoardDAO dao = new BoardDAO();
+       dao.login(id, pw);
+       
        %>
 <!DOCTYPE html>
 <html>

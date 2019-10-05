@@ -11,7 +11,7 @@
    <% 
  BoardDAO dao = new BoardDAO();
  List<BoardDTO> list = dao.select();
-	  
+ request.setAttribute("list", list);
 
   
    %> 
@@ -47,6 +47,13 @@
 </tr>
 </table>
 <hr>
-<c:forEach></c:forEach>  
+<c:forEach items="${list }" var="i" >
+    ${i.user_no } / ${i.user_name } / ${i.user_id } / ${i.user_pw } <br>
+</c:forEach>  
+
+
+
+
+
 </body>
 </html>

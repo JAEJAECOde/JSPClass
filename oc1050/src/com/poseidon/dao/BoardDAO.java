@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.poseidon.db.DBConnection;
@@ -76,5 +77,48 @@ public List<BoardDTO> select() {
 	 
 	 
 	
+}
+
+public List<HashMap<String, String>> select1(){
+  
+  ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String,String>>();
+  DBConnection dbCon = new DBConnection();
+  Connection conn= dbCon.getConnection();
+  Statement stmt = null;
+  String sql = "Select * FROM user";
+  ResultSet rs = null;
+  
+  try {
+    stmt = conn.createStatement();
+    rs = stmt.executeQuery(sql);
+    while (rs.next()) {
+      HashMap<String, String> map = new HashMap<String, String>();
+      map.put("user_no", rs.getString("user_no"));
+      map.put("user_no", rs.getString("user_name"));
+      map.put("user_no", rs.getString("user_id"));
+      map.put("user_no", rs.getString("user_pw"));
+      map.put("user_no", rs.getString("user_date"));
+      map.put("user_no", rs.getString("user_auth"));
+      
+      list.add(map);
+    }
+  } catch (SQLException e) {
+    // TODO Auto-generated catch block
+    e.printStackTrace();
+  } finally {
+    try {
+      if(rs != null) {rs.close();}
+      if(stmt != null) {stmt.close();}
+      if(conn != null) {conn.close();}
+  } catch (SQLException e) {
+      e.printStackTrace();
+  }
+    
+  }
+  
+  
+  
+  
+  return list;
 }
 }

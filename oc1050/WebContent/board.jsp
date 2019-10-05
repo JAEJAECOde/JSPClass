@@ -7,9 +7,9 @@
 <%@page import="com.poseidon.db.DBConnection"%>
 <%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fnt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix = "c"  %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions"  prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
 
 
  <% 
@@ -106,16 +106,40 @@ nuber가 100보다 크다면 '텍스트'가 출력-->
 </c:choose>
 
 
-<!-- fn을 choose 안에 사용하여 length로 길이를 확인함  -->
+<!-- fn을 choose 안에 사용하여 length로 길이를 확인함 
+그안에 formatDate를 사용하여 fmt로 날짜 대입 
+
+ -->
 <hr>
+<c:set value=" <%=new Date() %>" var="date"></c:set>
 <c:choose>
       <c:when test="${fn:length(list) > 0 }"> 
-         길이 : ${fn:lenght(list) }<br>  
-         테이블 </c:when>
+         테이블 
+         <c:forEach items="${list }" var="i"></c:forEach>
+         <fmt:formatDate value="${date }" type = "date"/>
+         <fmt:formatDate value="${date }" type = "time"/><br>
+         <fmt:formatDate value="${date }" type = "both"/><br>
+         </c:when>
       <c:otherwise>
       <h1>데이터가 없습니다. </h1>
       </c:otherwise>
 </c:choose>
+
+<hr>
+<fmt:parseNumber var="pNum" value="3.14" integerOnly="true"/>
+${pNum }
+
+<br>
+
+<!--  지역을 정하고 돈을 원화, 달러 등 모양을 나타낼수 있음 currency로 -->
+
+<fmt:setLocale value="ko_kr"/>
+<fmt:formatNumber value="10000000" type="currency"/>
+<br>
+<fmt:setLocale value="en_us"/>
+<fmt:formatNumber value="10000000" type="currency"/>
+
+
 
 
 </body>

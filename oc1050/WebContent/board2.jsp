@@ -45,7 +45,7 @@ tr:hover{
 
 <c:if test="${sessionScope.name eq null }"><a href="index.jsp">로그인해주세요.</c:if>
 <c:if test="${sessionScope.name ne null }">${sessionScope.name }님 반갑습니다.
-                                        <a href="logout">로그아웃</a></c:if> <!-- logout 확장자 없으니 서블릿 -->
+      <!-- logout 확장자 없으니 서블릿 --> <a href="logout">로그아웃</a></c:if>
 <hr>
 <!--
 교과목명		Spring 프로젝트 제작
@@ -65,7 +65,10 @@ tr:hover{
 <c:forEach items="${board }" var="i">
 	<tr>
 		<td id="t1">${i.board_no }</td>
-		<td id="t2">${i.board_title }</td>
+		<td id="t2">
+              <a href="detail?bno=${i.board_no }">${i.board_title }</a>
+              
+        </td>
 		<td id="t1">${i.user_name }</td>
 		<td>${i.board_date }</td>
 		<td id="t1">${i.board_count }</td>

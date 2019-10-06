@@ -60,4 +60,9 @@ public class BoardDTO {
         this.user_name = user_name;
     }
 
+    public BoardDTO dtail(int number) {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
 }

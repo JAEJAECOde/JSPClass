@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 import com.poseidon.db.DBConnection;
 import com.poseidon.dto.BoardDTO;
 
@@ -86,7 +86,7 @@ public List<HashMap<String, String>> select1(){
   DBConnection dbCon = new DBConnection();
   Connection conn= dbCon.getConnection();
   Statement stmt = null;
-  String sql = "Select * FROM user";
+  String sql = "Select * FROM jae";
   ResultSet rs = null;
   
   try {
@@ -160,6 +160,42 @@ public String login(String id, String pw) {
       return name;
   
    }
+
+
+public List<Map<String, String>> boardSelect(){
+  List<Map<String, String>> board = new ArrayList<Map<String,String>>();
+  DBConnection dbCon = new DBConnection();
+  Connection conn = dbCon.getConnection();
+  Statement stmt = null;
+  String sql = "SELECT * FROM board";
+  ResultSet rs = null;
+  
+  try {
+      stmt = conn.createStatement();
+      rs = stmt.executeQuery(sql);
+      while(rs.next()) {
+          Map<String, String> map = new HashMap<String, String>();
+          map.put("board_no", rs.getString("board_no"));
+          map.put("board_title", rs.getString("board_title"));
+          map.put("board_content", rs.getString("board_content"));
+          map.put("board_date", rs.getString("board_date"));
+          map.put("board_count", rs.getString("board_count"));
+          map.put("user_no", rs.getString("user_no"));
+          board.add(map);
+      }
+  } catch (SQLException e) {
+      e.printStackTrace();
+  } finally {
+      try {
+          if(rs != null) {    rs.close();  }
+          if(stmt != null) {  stmt.close();  }
+          if(conn != null) {  conn.close();  }
+      } catch (SQLException e) {
+          e.printStackTrace();
+      }
+  }
+  return board;
+}
 
 }
 

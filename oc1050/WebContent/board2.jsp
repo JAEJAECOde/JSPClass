@@ -1,4 +1,5 @@
 <%@page import="com.poseidon.dao.BoardDAO"%>
+<%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,44 +7,79 @@
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>    
     
 <%
-    BoardDAO dao = new BoardDAO();
-    List<HashMap<String, String>> list = dao.select1();
-    request.setAttribute("list1", list);
+BoardDAO dao = new BoardDAO();
+List<Map<String, String>> board = dao.boardSelect();
+request.setAttribute("board", board);
 %>    
     
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>보드2</title>
+<title>게시판</title>
+<style type="text/css">
+
+table{
+height: autu;
+width: 900px;
+border-collapse: separate;
+}
+
+tr{
+height: 30px;
+border-bottom:  1px gray solid;
+}
+
+#t1 :hover {
+	background-color: #c0c0c0c;
+}
+#t2 {width: 40%]}
+</style>
+
+
+
+
 </head>
 <body>
+
+<!-- 로그인 했을때 안했을때 설정 -->
+name : ${sessionScope.name } <br>
+id : ${sessionScope.id } <br>
+<c:if test="${sessionScope.name eq null }">로그인 해주세요</c:if>
+<c:if test="${sessionScope.name ne null }">${sessionScope.name }님 반갑습니다.</c:if>
+
 <!-- 여기에 로그인 -->
-<a href="board.jsp">게시판</a>
-<a href="board2.jsp">게시판</a>
+<c:if test="${sessionScope.id eq null }">
+<a href="index.jsp">로그인</a> </c:if>
+<a href="board2.jsp">다시보기</a>
 
-길이 : <%=list.size() %> <br>
-
-<% for(int i = 0; i < list.size(); i++){ %>
-<%=list.get(i).get("user_no") %>
-<%=list.get(i).get("user_name") %>
-<%=list.get(i).get("user_id") %>
-<%=list.get(i).get("user_pw") %>
-<%=list.get(i).get("user_date") %>
-<%=list.get(i).get("user_auth") %>
-<% }%>
-
-
-
-<hr>
-<c:forEach items="${list1 } }" var="i"/>
+<table>
+  <tr>
+     <td> 번호</td>
+     <td> 제목</td>
+     <td> 컨텐츠</td>
+     <td> 날짜</td>
+     <td> 조회수</td>
+     <td> 회원수</td>
+</tr>
+<!--  메뉴바 만들곳 -->
+<c:forEach items="${board }" var="i">
     <tr>
-        <td>${i.user_no }</td>
-        <td>${i.user_name }</td>
-        <td>${i.user_id }</td>
-        <td>${i.user_pw }</td>
-        <td>${i.user_date }</td>
-        <td>${i.user_auth }</td>
+        <td id="t1">${i.board_no}</td>
+        <td id="t2">${i.board_title }</td>
+        <td id="t1">${i.board_content}</td>
+        <td>${i.board_date }</td>
+        <td id="t1">${i.board_count }</td>
+        <td id="t1">${i.user_no }</td>
       </tr>
+</c:forEach>
+      </table>
+      <!-- 로그인한 사용자만 보이게 하기 -->
+      
+      <c:if test="${sessionScope.id ne null }">
+      <a href="write.jsp"><img alt="글쓰기" src="Img/write.png">[글쓰기]</a>
+      </c:if>
+      
+      
 </body>
 </html>

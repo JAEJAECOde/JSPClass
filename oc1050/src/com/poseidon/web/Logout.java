@@ -21,12 +21,15 @@ public class Logout extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//세션종료 > index.jsp로 보낼예정
 	    HttpSession session = request.getSession();
-	    session.invalidate(); // 모든세션 종료하는 함수 (로그인 되어있는 자신만)
-	    session.removeAttribute("id");
-	    session.removeAttribute("name");  //해당 세션을 종료합니다.
-	    
-	    //페이지 이동 
+	   // session.invalidate(); // 모든세션 종료하는 함수 (로그인 되어있는 자신만)
+	   if( session.getAttribute("id") != null) {
+	    session.removeAttribute("id");  //해당 세션을 종료합니다.
+	   }
+	   if(session.getAttribute("name") != null) {
+	   session.removeAttribute("name");
+	   }  //페이지 이동 
 	    response.sendRedirect("index.jsp");
+	    
 	}
 
 

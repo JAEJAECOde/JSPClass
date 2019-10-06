@@ -45,7 +45,7 @@ tr:hover{
 
 <c:if test="${sessionScope.name eq null }"><a href="index.jsp">로그인해주세요.</c:if>
 <c:if test="${sessionScope.name ne null }">${sessionScope.name }님 반갑습니다.
-                                        <a href="logout">로그아웃</a></c:if>
+                                        <a href="logout">로그아웃</a></c:if> <!-- logout 확장자 없으니 서블릿 -->
 <hr>
 <!--
 교과목명		Spring 프로젝트 제작

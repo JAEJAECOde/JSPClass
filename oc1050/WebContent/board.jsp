@@ -34,10 +34,7 @@ for(int i = 0; list.size() > i; i++){
 	<tr>
 		<td><%=list.get(i).getUser_no() %></td>
 		<td><%=list.get(i).getUser_name() %></td>
-		<td><%=list.get(i).getUser_id() %></td>
-		<td><%=list.get(i).getUser_pw() %></td>
-		<td><%=list.get(i).getUser_date() %></td>
-		<td><%=list.get(i).getUser_auth() %></td>
+		
 	</tr>
 <%
 }

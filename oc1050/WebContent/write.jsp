@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% if(session.getAttribute("id") == null || session.getAttribute("name") == null  ){ response.sendRedirect("index.jsp");
+  
+  
+}%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,38 +10,43 @@
 <title>글쓰기</title>
 <style type="text/css">
 #writebox{
-height: auto;
-width: 600px;
-margin: 0 auto;
-margin-top: 50px; 
-
+	margin: 0 auto;
+	margin-top: 50px;
+	height: auto;
+	width: 600px;
 }
-input{
- width: 600px;
- height: 30px;
- padding-bottom: 5px;
-
+input {
+	margin:0;
+	padding:0;
+	width: 600px;
+	height: 30px;
+	margin-bottom: 5px;
 }
 textarea {
+	margin:0;
+	padding:0;
 	width: 600px;
-    height: 500px;
-    margin-buttom: 5px; 
-    
+	height: 500px;
+	margin-bottom: 5px;
 }
 button {
 	width: 600px;
-    height: 30px;
+	height: 30px;
+	font-size: large;
 }
-
+button:hover {
+	background-color: blue;
+	color: white;
+}
 </style>
 </head>
 <body>
-  <div id = "writebox">
-    <form action="wirteAction" method="post"> <!--  action 데이터를 날라갈곳 정하기  << 서블릿 사용 -->
-          <input type="text" name="title" placeholder="제목을 입력하세요"><br>
-          <textarea name="content" cols=""></textarea><br>
-          <button type="submit">글쓰기</button>
-    </form>
-  </div>
+	<div id="writebox">
+		<form action="writeAction" method="post">
+			<input type="text" name="title" placeholder="제목을 입력하세요"><br>
+			<textarea name="content"></textarea><br>
+			<button type="submit">글 쓰 기</button>
+		</form>
+	</div>
 </body>
 </html>

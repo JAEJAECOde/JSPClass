@@ -14,73 +14,9 @@ import com.poseidon.dto.BoardDTO;
 
 
 public class BoardDAO {
-public List<BoardDTO> select() {
-	 List<BoardDTO> list = new ArrayList<BoardDTO>();
-	 DBConnection dbCon = new DBConnection();
-	 Connection conn= null;
-	 Statement stmt = null;
-	 ResultSet rs = null;
-	 String sql = "SELCET * FROM user";
-	 conn = dbCon.getConnection();
-	 try {
-		stmt = conn.createStatement();
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	 try {
-		rs = stmt.executeQuery(sql);
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	 try {
-		while (rs.next()) {
-			 BoardDTO dto = new BoardDTO();
-			  dto.setUser_no(rs.getInt("user_no"));
-			  dto.setUser_name(rs.getString("user_name"));
-			  dto.setUser_id(rs.getString("user_id"));
-			  dto.setUser_pw(rs.getString("user_pw"));
-			  dto.setUser_date(rs.getString("user_date"));
-			  dto.setUser_auth(rs.getInt("user_auth"));
-			  list.add(dto);
-			 
-		 }
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	 
-	 
-	 if(rs != null)
-		try {
-			rs.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	 if(stmt != null)
-		try {
-			stmt.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	 if(conn != null)
-		try {
-			conn.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	 
-	 return list;
-	 
-	 
-	
-}
 
-public List<HashMap<String, String>> select1(){
+
+public List<HashMap<String, String>> select(){
   
   ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String,String>>();
   DBConnection dbCon = new DBConnection();
@@ -167,7 +103,7 @@ public List<Map<String, String>> boardSelect(){
   DBConnection dbCon = new DBConnection();
   Connection conn = dbCon.getConnection();
   Statement stmt = null;
-  String sql = "SELECT * FROM board";
+  String sql = "SELECT * FROM boardview";
   ResultSet rs = null;
   
   try {
@@ -177,10 +113,10 @@ public List<Map<String, String>> boardSelect(){
           Map<String, String> map = new HashMap<String, String>();
           map.put("board_no", rs.getString("board_no"));
           map.put("board_title", rs.getString("board_title"));
-          map.put("board_content", rs.getString("board_content"));
+          //map.put("board_content", rs.getString("board_content"));
           map.put("board_date", rs.getString("board_date"));
           map.put("board_count", rs.getString("board_count"));
-          map.put("user_no", rs.getString("user_no"));
+          map.put("user_name", rs.getString("user_name"));
           board.add(map);
       }
   } catch (SQLException e) {
@@ -196,6 +132,33 @@ public List<Map<String, String>> boardSelect(){
   }
   return board;
 }
+
+public void writeAction(BoardDTO dto) {
+//저장만 해도되서 void
+//글쓰기할 공간 필요요소 제목, 내용, 글쓴사람의 User_no 
+  DBConnection dbCon = new DBConnection();
+  Connection conn = null;
+  PreparedStatement pstmt = null;
+  String sql = "INSERT INTO board (board_title, board_content, user_no) "
+      + "Values (?, ?, (SELECT user_no FROM jae WHERE user_id = ?))";
+  
+  conn = dbCon.getConnection();
+  try {
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setString(1, dto.getBoard_title());
+    pstmt.setString(2, dto.getBoard_content());
+    pstmt.setString(3, dto.getUser_name()); //name이지만ID를 담겠다.
+    
+    pstmt.execute();
+    
+  } catch (SQLException e) {
+    e.printStackTrace();
+}
+  
+  
+  
+}
+
 
 }
 

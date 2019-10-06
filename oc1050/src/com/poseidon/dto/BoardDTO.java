@@ -1,55 +1,63 @@
 package com.poseidon.dto;
 
 public class BoardDTO {
-	private int user_no, user_auth;
-	private String user_name, user_id, user_pw, user_date;
+    private int board_no, board_count, user_no;
+    private String board_title, board_content, board_date, user_name;
 
-	public int getUser_no() {
-		return user_no;
-	}
+    public int getBoard_no() {
+        return board_no;
+    }
 
-	public void setUser_no(int user_no) {
-		this.user_no = user_no;
-	}
+    public void setBoard_no(int board_no) {
+        this.board_no = board_no;
+    }
 
-	public int getUser_auth() {
-		return user_auth;
-	}
+    public int getBoard_count() {
+        return board_count;
+    }
 
-	public void setUser_auth(int user_auth) {
-		this.user_auth = user_auth;
-	}
+    public void setBoard_count(int board_count) {
+        this.board_count = board_count;
+    }
 
-	public String getUser_name() {
-		return user_name;
-	}
+    public int getUser_no() {
+        return user_no;
+    }
 
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
-	}
+    public void setUser_no(int user_no) {
+        this.user_no = user_no;
+    }
 
-	public String getUser_id() {
-		return user_id;
-	}
+    public String getBoard_title() {
+        return board_title;
+    }
 
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
-	}
+    public void setBoard_title(String board_title) {
+        this.board_title = board_title;
+    }
 
-	public String getUser_pw() {
-		return user_pw;
-	}
+    public String getBoard_content() {
+        return board_content;
+    }
 
-	public void setUser_pw(String user_pw) {
-		this.user_pw = user_pw;
-	}
+    public void setBoard_content(String board_content) {
+        this.board_content = board_content;
+    }
 
-	public String getUser_date() {
-		return user_date;
-	}
+    public String getBoard_date() {
+        return board_date;
+    }
 
-	public void setUser_date(String user_date) {
-		this.user_date = user_date;
-	}
+    public void setBoard_date(String board_date) {
+        this.board_date = board_date;
+    }
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
 
 }

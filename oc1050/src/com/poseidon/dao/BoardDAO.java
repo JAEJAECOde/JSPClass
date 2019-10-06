@@ -130,7 +130,7 @@ public String login(String id, String pw) {
       ResultSet rs = null;
       String sql = "SELECT * FROM jae WHERE user_id = ? AND user_pw=?;";
      // String sql1 = "SELECT * FROM jae WHERE user_id = '" +id+ "' AND user_pw='" +pw+ "';";
-      //String sql2 = "str" + id + "' str";  그냥 쓰면 힘들어짐 그래서 정보가 들어가는곳을 ?으로 대채 
+      //String sql2 = "str" + id + "' str";  그냥 쓰면 힘들어짐 그래서 정보가 들어가는곳을 ?(따옴표 필요 없음)으로 대채 
       //              str 'admin' str
       
       conn = dbCon.getConnection();
@@ -139,11 +139,9 @@ public String login(String id, String pw) {
         pstmt.setString(1, id); //첫번째 ?에 id값이 스트링으로 받는다
         pstmt.setString(2, pw); //두번째 ?에 pw값이 스트링으로 받는다
         
-       rs = pstmt.executeQuery(); //select에만 excuteQuery로 받음 나머진 excute로
-           if(rs.next()) {
+       rs = pstmt.executeQuery(); //select에만 excuteQuery(인트나 불리언값들어옴)로 받음 나머진 excute로
+           if(rs.next()) { //rs값을 열어봤는데 찍어줄게 있다면 << next()임 
            name = rs.getString("user_name");
-           
-  
            }
        
       } catch (SQLException e) {

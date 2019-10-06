@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +43,13 @@ color: white;
         <input type="password" name="pw" placeholder="암호를 입력하세요">
         <button type="submit">로그인</button>
      </form>
-
+          <% if (request.getParameter("error") != null ){
+            %>
+            <h2 style="color:red;">잘못된 로그인입니다. 다시 시도하세요</h2>
+            <%
+             } 
+            %>
+          
    </div>
    
 <a href = "board.jsp"> 게시판 </a>

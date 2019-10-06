@@ -154,11 +154,48 @@ public void writeAction(BoardDTO dto) {
   } catch (SQLException e) {
     e.printStackTrace();
 }
-  
-  
-  
+
 }
 
-
+public BoardDTO detail(int num) {
+  //dtail을 실행시킬때 SQL의 내용 모두 담을 수 잇는 DTO를 반환형으로 가져여함! 
+  BoardDTO dto = new BoardDTO();
+  DBConnection dbCon = new DBConnection();
+  Connection conn = dbCon.getConnection();
+  Statement stmt = null;
+  String sql = "SELECT * FROM board WHERE board_no=" + num;
+  ResultSet rs = null;
+  
+  conn = dbCon.getConnection();
+  try {
+    stmt= conn.createStatement();
+    rs = stmt.executeQuery(sql);
+    while(rs.next()) {
+      dto.setBoard_no(rs.getInt("board_no")); // 1 컬럼의 순서대로 1이나 board_no로 둘다 쓸수잇음
+      dto.setBoard_title(rs.getString("board_title"));
+      dto.setBoard_title(rs.getString("board_content"));
+      dto.setBoard_title(rs.getString("board_date"));
+      dto.setBoard_count(rs.getInt("board_count"));
+      dto.setUser_name(rs.getString("user_name"));
+      
+  
+    }
+  
+  } catch (SQLException e) {
+   
+    e.printStackTrace();
+  } finally {
+    try {
+    if(rs != null) {    rs.close();  }
+    if(stmt != null) {  stmt.close();  }
+    if(conn != null) {  conn.close();  }
+    } catch (SQLException e) {
+    e.printStackTrace();
+    }
+    
+ }
+     return dto;
+  
+  }
 }
 

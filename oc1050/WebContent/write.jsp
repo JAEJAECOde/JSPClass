@@ -34,7 +34,7 @@ button {
 </head>
 <body>
   <div id = "writebox">
-    <form action="" method="post"> <!--  action 데이터를 날라갈곳 정하기  << 서블릿 사용 -->
+    <form action="wirteAction" method="post"> <!--  action 데이터를 날라갈곳 정하기  << 서블릿 사용 -->
           <input type="text" name="title" placeholder="제목을 입력하세요"><br>
           <textarea name="content" cols=""></textarea><br>
           <button type="submit">글쓰기</button>
